@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURI Finance — an agentic finance department, run live</title>
+<meta name="description" content="9 Claude-powered finance agents that actually close a month's books — built and verified against the real Anthropic API by Deion Wells-Ross.">
+<style>
+  :root{
+    --bg:#0b1220; --bg2:#0f1830; --card:#131f3d; --card-border:#22315a;
+    --text:#e9edf7; --text-dim:#a7b2cc; --accent:#4fd1a5; --accent2:#6ea8fe;
+    --warn:#f5b95e; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px}
+  a{color:var(--accent2)}
+  a.button, a.button:visited{
+    display:inline-block; text-decoration:none; color:#08131f; background:var(--accent);
+    padding:11px 20px; border-radius:8px; font-weight:600; font-size:15px;
+  }
+  a.button.secondary{background:transparent; color:var(--text); border:1px solid var(--card-border)}
+  header.hero{
+    padding:88px 0 56px; background:
+      radial-gradient(700px 420px at 15% -10%, rgba(79,209,165,0.16), transparent 60%),
+      radial-gradient(700px 420px at 90% 0%, rgba(110,168,254,0.14), transparent 60%);
+    border-bottom:1px solid var(--card-border);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 14px;
+  }
+  h1{font-size:clamp(32px,5vw,48px); line-height:1.15; margin:0 0 18px; letter-spacing:-0.01em}
+  .lede{font-size:19px; color:var(--text-dim); max-width:640px; margin:0 0 30px}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:34px}
+  .byline{font-size:14px; color:var(--text-dim)}
+  .byline strong{color:var(--text)}
+
+  section{padding:64px 0; border-bottom:1px solid var(--card-border)}
+  section:last-of-type{border-bottom:none}
+  h2{font-size:26px; margin:0 0 10px; letter-spacing:-0.01em}
+  .section-intro{color:var(--text-dim); max-width:680px; margin:0 0 34px; font-size:16px}
+
+  .grid{display:grid; gap:16px}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:720px){ .grid.cols-3, .grid.cols-4{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:460px){ .grid.cols-3, .grid.cols-4{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card); border:1px solid var(--card-border); border-radius:12px; padding:20px;
+  }
+  .agent-card h3{margin:0 0 6px; font-size:16px}
+  .agent-card .role{font-family:var(--mono); font-size:12px; color:var(--accent); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; display:block}
+  .agent-card p{margin:0; font-size:14px; color:var(--text-dim)}
+
+  .flow{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:28px 0 8px}
+  .flow-step{
+    font-family:var(--mono); font-size:13px; background:var(--card); border:1px solid var(--card-border);
+    border-radius:8px; padding:8px 12px; white-space:nowrap;
+  }
+  .flow-step.gate{border-color:var(--warn); color:var(--warn)}
+  .flow-arrow{color:var(--text-dim); font-size:14px}
+
+  .stat{text-align:left}
+  .stat .num{font-family:var(--mono); font-size:28px; font-weight:600; color:var(--accent); display:block; margin-bottom:4px}
+  .stat .label{font-size:13px; color:var(--text-dim)}
+
+  blockquote{
+    margin:20px 0; padding:16px 20px; background:var(--bg2); border-left:3px solid var(--accent2);
+    border-radius:0 8px 8px 0; font-size:15px; color:var(--text); font-style:italic;
+  }
+  blockquote cite{display:block; margin-top:8px; font-style:normal; font-family:var(--mono); font-size:12px; color:var(--text-dim)}
+
+  .story-step{display:flex; gap:16px; margin-bottom:22px}
+  .story-step .marker{
+    flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:var(--bg2);
+    border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+  }
+  .story-step .body h4{margin:2px 0 6px; font-size:15px}
+  .story-step .body p{margin:0; color:var(--text-dim); font-size:15px}
+
+  table{width:100%; border-collapse:collapse; font-size:14px; margin-top:8px}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--card-border)}
+  th{color:var(--text-dim); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.04em}
+  td.found{color:var(--accent); font-family:var(--mono); font-size:13px}
+  .tbl-wrap{overflow-x:auto}
+
+  .bug{margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--card-border)}
+  .bug:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0}
+  .bug h4{margin:0 0 6px; font-size:15px; display:flex; align-items:center; gap:8px}
+  .bug .found-in{font-family:var(--mono); font-size:11px; color:var(--warn); border:1px solid var(--warn); border-radius:4px; padding:2px 7px; text-transform:uppercase}
+  .bug p{margin:0; color:var(--text-dim); font-size:14.5px}
+
+  footer{padding:48px 0 72px; text-align:center; color:var(--text-dim); font-size:14px}
+  footer a{color:var(--text-dim)}
+  code{font-family:var(--mono); font-size:0.92em; background:var(--bg2); padding:1px 6px; border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Project 01 of AURI &middot; agentic AI for the enterprise</p>
+    <h1>An agentic finance department that actually closes the books.</h1>
+    <p class="lede">
+      Nine Claude-powered agents run a fictional B2B SaaS company's month-end close
+      end to end &mdash; categorizing transactions, validating the trial balance, chasing
+      collections, running payroll checks, forecasting, and briefing the CFO &mdash; gated
+      by two human approvals and a segregation-of-duties control architecture. Every
+      milestone below was run live against the real Anthropic API, not simulated.
+    </p>
+    <div class="cta-row">
+      <a class="button" href="https://github.com/deion-wells-ross/auri-finance">View the repo →</a>
+      <a class="button secondary" href="sample-dashboard.html">See a real generated close package</a>
+    </div>
+    <p class="byline">Built by <strong>Deion Wells-Ross</strong> &middot; <a href="https://github.com/deion-wells-ross/auri-finance">github.com/deion-wells-ross/auri-finance</a></p>
+  </div>
+</header>
+
+<section id="idea">
+  <div class="wrap">
+    <h2>The premise</h2>
+    <p class="section-intro">
+      Most "AI agent" demos show a model reasoning convincingly about a task. AURI Finance
+      was built to a stricter bar: the agents had to actually do the job, against a real
+      synthetic company's books, with real mistakes seeded in on purpose &mdash; and every
+      milestone had to be run live against the Anthropic API and verified against real
+      database state before it counted as done. Bugs found during a live run weren't
+      patched over quietly; they're documented below, because a system that only works in
+      the happy path isn't actually working.
+    </p>
+    <p class="section-intro">
+      The target company is <strong>Meridian Analytics</strong>, a fictional B2B SaaS
+      business with six months of transaction history, 120 employees, 87 AP invoices, and
+      540 AR invoices &mdash; deliberately seeded with six realistic anomalies (a duplicate
+      vendor charge, an unexplained margin decline, a payroll-vs-revenue divergence, an
+      AR concentration risk, a budget overrun, and one genuinely ambiguous transaction with
+      no confident answer) that no agent was ever told about in advance.
+    </p>
+  </div>
+</section>
+
+<section id="roster">
+  <div class="wrap">
+    <h2>Meet the department</h2>
+    <p class="section-intro">
+      Each agent has a narrow, real toolset &mdash; not a general "do finance" prompt. Some
+      hold write access scoped to their own domain only; several are read-only by design.
+    </p>
+    <div class="grid cols-3">
+      <div class="card agent-card"><span class="role">Haiku 4.5</span><h3>Bookkeeping</h3><p>Categorizes the bank feed, posts only above a 0.75 confidence bar, escalates the rest instead of guessing.</p></div>
+      <div class="card agent-card"><span class="role">Sonnet &middot; read-only writes</span><h3>Controller</h3><p>Validates the trial balance and subledgers, re-runs its own duplicate check, and can only raise a correction request &mdash; zero write access to anyone else's data.</p></div>
+      <div class="card agent-card"><span class="role">Haiku 4.5</span><h3>Accounts Payable</h3><p>The only agent with real write access, scoped to its own domain: resolves or dismisses duplicate vendor charges.</p></div>
+      <div class="card agent-card"><span class="role">Haiku 4.5 &middot; read-only</span><h3>Accounts Receivable</h3><p>Prioritizes collections against real aging and concentration risk.</p></div>
+      <div class="card agent-card"><span class="role">Haiku 4.5 &middot; read-only</span><h3>Payroll &amp; Workforce</h3><p>Checks payroll against budget by actual salary account, not a guessed one.</p></div>
+      <div class="card agent-card"><span class="role">Sonnet</span><h3>FP&amp;A</h3><p>Explains margin trends against real GL drivers and sets the next quarter's forecast assumption.</p></div>
+      <div class="card agent-card"><span class="role">Sonnet</span><h3>CFO</h3><p>Delegates to specialists via real nested API calls and synthesizes a schema-validated, fact/hypothesis/recommendation briefing.</p></div>
+      <div class="card agent-card"><span class="role">Deterministic &middot; no LLM</span><h3>Orchestrator</h3><p>Runs the sequence, independently re-checks every gate rather than trusting an agent's self-report.</p></div>
+      <div class="card agent-card"><span class="role">Deterministic &middot; no LLM</span><h3>Dashboard Publisher</h3><p>Assembles the closed period into a real report &mdash; and refuses outright unless the period is actually closed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="control">
+  <div class="wrap">
+    <h2>The control architecture</h2>
+    <p class="section-intro">
+      The books can't close on an agent's word alone. Two independent checks stand between
+      "an agent thinks this is fine" and a period actually flipping to <code>closed</code>:
+    </p>
+    <div class="flow">
+      <span class="flow-step">5 specialist agents run</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step gate">Gate 1 — independent re-check</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">FP&amp;A &rarr; CFO briefing</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step gate">Gate 2 — human approval</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">period closes &amp; dashboard publishes</span>
+    </div>
+    <p class="section-intro" style="margin-top:24px">
+      Gate 1 doesn't trust Controller's own "ready" flag &mdash; the orchestrator re-derives
+      it independently. Gate 2 is a hard stop: the only write anywhere in the system capable
+      of flipping <code>period_status.status</code> to <code>closed</code> requires a human
+      to run <code>orchestrator/approve.py</code> by name. Controller itself holds zero write
+      access into any other agent's data &mdash; its only lever on a finding is filing a row
+      in <code>correction_requests</code>, confirmed by a dedicated test that asserts the
+      ledger is unchanged after it raises one.
+    </p>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <h2>Watch it work: a specialist gets it wrong, and the close still can't complete</h2>
+    <p class="section-intro">
+      The strongest evidence for this architecture isn't a passing test &mdash; it's what
+      happened on a fresh database no agent had ever seen, during the M8 end-to-end run.
+    </p>
+    <div class="story-step">
+      <div class="marker">1</div>
+      <div class="body">
+        <h4>AP gets a real judgment call wrong</h4>
+        <p>AP's live duplicate-detector run found the seeded $14,200 CloudScale Hosting duplicate pair &mdash; and, on its own reasoning, dismissed it as a false positive.</p>
+        <blockquote>"Two separate legitimate billing items."<cite>&mdash; AP Agent, live run, dismissing the actual seeded anomaly</cite></blockquote>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="marker">2</div>
+      <div class="body">
+        <h4>Controller catches it anyway</h4>
+        <p>Controller reruns its own independent duplicate scan rather than trusting AP's &mdash; precisely so a specialist's dismissal can't quietly become the last word. It flagged the identical pair, filed a correction request, and refused to mark the period ready once the combined unresolved exposure ($28,032.95) crossed the $25,000 materiality threshold.</p>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="marker">3</div>
+      <div class="body">
+        <h4>The close blocks &mdash; correctly</h4>
+        <p>Gate 1 failed. Not a bug: the system did exactly what it was designed to do when a specialist's judgment and an independent re-check disagree.</p>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="marker">4</div>
+      <div class="body">
+        <h4>AP corrects itself on the very next pass</h4>
+        <p>Re-run against the same database, AP saw Controller's correction request, correctly reversed the duplicate, and was explicit about what it found and why.</p>
+        <blockquote>The paid duplicate represents a genuine double-payment needing vendor collections follow-up outside AP's scope.<cite>&mdash; AP Agent, second live run</cite></blockquote>
+      </div>
+    </div>
+    <div class="story-step">
+      <div class="marker">5</div>
+      <div class="body">
+        <h4>Gate 1 passes, a human approves, the period closes</h4>
+        <p>Controller's next pass found trial balance and subledgers tying out cleanly and zero duplicate candidates remaining. A human ran <code>orchestrator/approve.py --approved-by "Jordan Ellis, VP Finance"</code>, and <code>period_status</code> flipped to <code>closed</code> for the first time against this database.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scorecard">
+  <div class="wrap">
+    <h2>The scorecard: 6 of 6 seeded anomalies found</h2>
+    <p class="section-intro">
+      Checked programmatically against real database state and each agent's own submitted
+      report &mdash; not asserted from a summary. <code>tools/verify_anomalies.py</code> runs
+      code-level checks where the ledger itself proves it (a row actually marked
+      <code>disputed</code>, a transaction actually escalated) and narrative checks where the
+      evidence is a specialist's own written conclusion.
+    </p>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Seeded anomaly</th><th>Found</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Duplicate $14,200 CloudScale invoice</td><td class="found">✓ found</td><td>Marked <code>disputed</code> via <code>resolve_duplicate_invoice</code></td></tr>
+        <tr><td>2</td><td>Engineering payroll outpacing revenue</td><td class="found">✓ found</td><td>Payroll Agent's submitted report</td></tr>
+        <tr><td>3</td><td>Gross margin decline (78%→73.05%)</td><td class="found">✓ found</td><td>FP&amp;A traced it to hosting COGS growth</td></tr>
+        <tr><td>4</td><td>AR concentration + aging (Vantage, 34%)</td><td class="found">✓ found</td><td>AR Agent's submitted report</td></tr>
+        <tr><td>5</td><td>Marketing budget overrun (+28%)</td><td class="found">✓ found</td><td>FP&amp;A's variance scan</td></tr>
+        <tr><td>6</td><td>Genuinely ambiguous $9,800 transaction</td><td class="found">✓ found</td><td>Escalated for human review, not guessed at</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="numbers">
+  <div class="wrap">
+    <h2>The numbers, from the real August 2026 close</h2>
+    <div class="grid cols-4">
+      <div class="card stat"><span class="num">73.05%</span><span class="label">Gross margin, corrected</span></div>
+      <div class="card stat"><span class="num">4.4 mo</span><span class="label">Cash runway (flat-burn)</span></div>
+      <div class="card stat"><span class="num">202</span><span class="label">Audit log rows, one period</span></div>
+      <div class="card stat"><span class="num">55 / 55</span><span class="label">Tests passing</span></div>
+      <div class="card stat"><span class="num">9</span><span class="label">Live agents</span></div>
+      <div class="card stat"><span class="num">2</span><span class="label">Human approval gates</span></div>
+      <div class="card stat"><span class="num">$0.00</span><span class="label">Trial balance discrepancy, all-time</span></div>
+      <div class="card stat"><span class="num">~$7.10</span><span class="label">Total live API spend, M0–M8</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="bugs">
+  <div class="wrap">
+    <h2>Built by finding real bugs, not by avoiding them</h2>
+    <p class="section-intro">
+      Every milestone in this project ran live against the real API before it counted as
+      done. That surfaced real defects a code-review-only process would have missed. A few
+      of the more interesting ones:
+    </p>
+    <div class="bug">
+      <h4>A silently corrupted API call, present since milestone 2 <span class="found-in">found at M7</span></h4>
+      <p>All eight agent runners decided whether to send tool results back to the API by checking <code>stop_reason == "tool_use"</code> instead of whether a tool had actually been called. A turn that called a tool but ended for any other reason (usually hitting the token limit) silently dropped that tool's result, corrupting the next API call. It had been there since the second milestone; it only became reproducible once a later agent's larger outputs started brushing the token cap. Root-caused and fixed identically across all eight runners.</p>
+    </div>
+    <div class="bug">
+      <h4>The audit trail was missing the "why" for six milestones <span class="found-in">found at M8</span></h4>
+      <p>Every agent's terminal report call returned a bare receipt and never wrote its actual conclusion to the audit log &mdash; only intermediate tool calls were logged. Building the audit-trail replay tool to prove "who did what and why" is real found that the "why" had never actually been recorded. Fixed with a shared logging call wired into all seven agents.</p>
+    </div>
+    <div class="bug">
+      <h4>A control that trusted the exact staleness it existed to catch <span class="found-in">found at M5</span></h4>
+      <p>The Controller's "ready" flag was only ever set on success, never cleared on refusal &mdash; so after a correct refusal, the orchestrator's independent re-check could read a stale approval from an earlier run and pass anyway. Fixed by clearing the flag on every refusal path, not just success.</p>
+    </div>
+    <div class="bug">
+      <h4>A reversal that didn't check whether the money was already spent <span class="found-in">found at M5</span></h4>
+      <p>Fixing the bug above surfaced a real one behind it: a live AP run had reversed what it thought was a duplicate invoice that had, in fact, already been paid &mdash; creating a permanent break between the ledger and the subledger. Fixed by refusing any reversal against a <code>paid</code> invoice, and by giving AP a way to permanently record a reviewed false positive instead of re-litigating it every run.</p>
+    </div>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <h2>Explore it yourself</h2>
+    <p class="section-intro">
+      The full source, test suite, design charter, and build history &mdash; nine milestones
+      documented honestly, bugs included &mdash; are in the repository.
+    </p>
+    <div class="cta-row">
+      <a class="button" href="https://github.com/deion-wells-ross/auri-finance">github.com/deion-wells-ross/auri-finance →</a>
+      <a class="button secondary" href="https://github.com/deion-wells-ross/auri-finance/blob/main/docs/architecture/v1-design-charter.md">Read the design charter</a>
+      <a class="button secondary" href="sample-dashboard.html">See a real generated close package</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    AURI Finance &middot; Project 01 of AURI &middot; built by Deion Wells-Ross<br>
+    <a href="https://github.com/deion-wells-ross/auri-finance">Source on GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

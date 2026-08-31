@@ -128,7 +128,13 @@ charter: V1 scope, agent roster, control architecture, and build sequence.
   a full 202-row audit trail replayed end to end
   (`tools/replay_audit_trail.py`, `reports/demo/2026-08/`), a human
   approval on record, and the period closed. 55/55 tests passing.
-- **M9 onward** (portfolio artifacts): not started yet.
+- **M9 — portfolio showcase: done.** `docs/index.html` — a self-contained static
+  page (architecture overview, the real M8 AP-mistake/Controller-catch story with
+  direct quotes from the live run, the 6/6 anomaly scorecard, real KPIs from the
+  August close, and an honest list of the real bugs found along the way) deployed
+  via GitHub Pages. `docs/sample-dashboard.html` is an unedited copy of a real
+  generated close package, linked from the showcase so a visitor can see actual
+  agent output, not a description of it.
 
 ## Setup
 
@@ -146,10 +152,15 @@ data/seed/           synthetic dataset generator + its own README
 services/            deterministic calculation layer (statements, metrics, aging, payroll_calc, forecast)
 tests/               Layer-1 correctness tests against the seeded database
 docs/architecture/   the design charter this was built from
+docs/index.html      (M9+) the portfolio showcase page, served via GitHub Pages
 agents/              (M2+) one folder per finance agent
 orchestrator/        (M5+) month-end workflow state machine
 reports/             (M7+) published close packages, one folder per period
                       (M8+) reports/demo/ — fresh-database end-to-end demo output
 ```
+
+## License
+
+MIT — see `LICENSE`.
 
 Full repository layout and rationale: `docs/architecture/v1-design-charter.md`, Section 11.
