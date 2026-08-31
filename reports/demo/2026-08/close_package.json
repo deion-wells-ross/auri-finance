@@ -1,0 +1,255 @@
+{
+  "status": "ok",
+  "period": "2026-08",
+  "generated_at": "2026-08-31T16:26:02+00:00",
+  "close": {
+    "status": "closed",
+    "closed_at": "2026-08-31T16:21:12+00:00",
+    "approved_by": "Jordan Ellis, VP Finance"
+  },
+  "income_statement": {
+    "period": "2026-08",
+    "revenue": {
+      "lines": [
+        {
+          "account_id": "sub_rev",
+          "code": "4000",
+          "name": "Subscription Revenue",
+          "amount": 1499999.99
+        }
+      ],
+      "total": 1499999.99
+    },
+    "cogs": {
+      "lines": [
+        {
+          "account_id": "cogs_hosting",
+          "code": "5000",
+          "name": "Hosting & Infrastructure",
+          "amount": 396200.0
+        },
+        {
+          "account_id": "cogs_data",
+          "code": "5200",
+          "name": "Third-Party Data Costs",
+          "amount": 8000.0
+        }
+      ],
+      "total": 404200.0
+    },
+    "gross_profit": 1095799.99,
+    "gross_margin_pct": 73.05,
+    "opex": {
+      "lines": [
+        {
+          "account_id": "sal_eng",
+          "code": "6000",
+          "name": "Salaries & Wages - Engineering",
+          "amount": 622362.8
+        },
+        {
+          "account_id": "sal_sales",
+          "code": "6010",
+          "name": "Salaries & Wages - Sales",
+          "amount": 225675.0
+        },
+        {
+          "account_id": "sal_mkt",
+          "code": "6020",
+          "name": "Salaries & Wages - Marketing",
+          "amount": 128594.01
+        },
+        {
+          "account_id": "sal_cs",
+          "code": "6030",
+          "name": "Salaries & Wages - Customer Success",
+          "amount": 157123.84
+        },
+        {
+          "account_id": "sal_ga",
+          "code": "6040",
+          "name": "Salaries & Wages - G&A",
+          "amount": 90144.28
+        },
+        {
+          "account_id": "payroll_tax",
+          "code": "6100",
+          "name": "Payroll Taxes & Benefits",
+          "amount": 257018.99
+        },
+        {
+          "account_id": "marketing",
+          "code": "6300",
+          "name": "Marketing & Advertising",
+          "amount": 83037.15
+        },
+        {
+          "account_id": "software",
+          "code": "6400",
+          "name": "Software & Tools",
+          "amount": 20407.99
+        },
+        {
+          "account_id": "travel",
+          "code": "6500",
+          "name": "Travel & Entertainment",
+          "amount": 1840.0
+        },
+        {
+          "account_id": "facilities",
+          "code": "6600",
+          "name": "Facilities & Rent",
+          "amount": 22000.0
+        },
+        {
+          "account_id": "prof_fees",
+          "code": "6700",
+          "name": "Professional Fees",
+          "amount": 6195.6
+        }
+      ],
+      "total": 1614399.66
+    },
+    "operating_income": -518599.67
+  },
+  "balance_sheet": {
+    "as_of_period": "2026-08",
+    "assets": {
+      "total": 2476755.33
+    },
+    "liabilities": {
+      "total": 0.0
+    },
+    "equity": {
+      "paid_in_capital": 6000000.0,
+      "cumulative_net_income": -3523244.67,
+      "total": 2476755.33
+    },
+    "balanced": true
+  },
+  "cash_flow": {
+    "period": "2026-08",
+    "by_source": [
+      {
+        "source_type": "ap",
+        "net": -525040.74
+      },
+      {
+        "source_type": "ar_collection",
+        "net": 1366880.64
+      },
+      {
+        "source_type": "bank_feed",
+        "net": -12640.0
+      },
+      {
+        "source_type": "payroll",
+        "net": -1480918.92
+      }
+    ],
+    "net_change_in_cash": -651719.02,
+    "beginning_cash": 2829237.25,
+    "ending_cash": 2177518.23
+  },
+  "kpis": {
+    "gross_margin_pct": 73.05,
+    "payroll_pct_of_revenue": {
+      "period": "2026-08",
+      "revenue": 1499999.99,
+      "payroll_cost": 1480918.92,
+      "pct_of_revenue": 98.73
+    },
+    "burn_rate": {
+      "period": "2026-08",
+      "net_change_in_cash": -651719.02,
+      "is_burning": true
+    },
+    "cash_runway": {
+      "as_of_period": "2026-08",
+      "ending_cash": 2177518.23,
+      "avg_monthly_burn": -491729.44,
+      "runway_months": 4.4
+    }
+  },
+  "active_forecast_assumption": {
+    "assumption_id": "fca_a2659c13c9",
+    "period": "2026-09",
+    "monthly_growth_rate_pct": 1.0,
+    "basis": "Trailing 3-month actual revenue growth (Jun-Aug 2026) averaged ~1.0%/month (May\u2192Jun +0.89%, Jun\u2192Jul +0.89%, Jul\u2192Aug +1.21%), a clear deceleration from the 1.8-1.9%/month pace seen Sep 2025-Jan 2026. The model's own inference over the full 12-month window returns 1.31%, but that figure is pulled up by the earlier, no-longer-current faster-growth period and doesn't reflect where the trend currently sits. Additionally, hosting/infra COGS (acct 5000) grew 10.3% (Jun\u2192Jul) and 13.96% (Jul\u2192Aug) - far outpacing revenue - driving gross margin down from 78.0% (Jan-Jun) to 76.0% (Jul) to 73.05% (Aug). That cost trend is a reason for conservatism on the topline assumption rather than extrapolating the higher blended historical rate.",
+    "set_by_agent": "fpa_agent",
+    "status": "active",
+    "created_at": "2026-08-31T16:22:05+00:00"
+  },
+  "fpa_report": {
+    "summary": "August 2026 gross margin fell sharply to 73.05% from a stable 78.0% baseline (Jan-Jun) and 76.0% in July. The driver is COGS, specifically Hosting & Infrastructure (acct 5000), which grew 10.3% Jun\u2192Jul and 13.96% Jul\u2192Aug while revenue grew only 0.88-1.21% over the same months \u2014 a real, accelerating cost trend, not a one-time item. Budget-variance scan found two material outliers: Marketing & Advertising overspent budget by 28% ($18,164, MKT dept) and Sales Commissions came in at $0 vs. a $6,904 budget (-100%, SALES dept), most likely a timing shift rather than a spend cut given Sales salaries and headcount costs were on-plan (+3.45%). All other budget lines were within ~5% of plan and not considered material. A revenue forecast was built off 12 months of history; the model's naive inference (1.31%/mo) was judged too high given the clear deceleration to ~1.0%/mo over the trailing 3 months and the fact that costs (hosting COGS) are now outpacing revenue growth by an order of magnitude \u2014 so a more conservative 1.0%/month assumption was recorded for Sep-Nov 2026, projecting revenue of ~$1.515M / $1.530M / $1.545M.",
+    "gross_margin_trend_explained": true,
+    "material_variances": [
+      "MKT / marketing (acct 6300): actual $83,037.15 vs budget $64,872.77, +28.0% ($18,164.38 over) \u2014 spend nearly doubled vs. the $43.5-45.8K run-rate seen in Jun/Jul, indicating a specific campaign/timing spike rather than gradual trend creep.",
+      "SALES / commissions: actual $0.00 vs budget $6,903.96, -100.0% \u2014 likely a timing/booking shift since Sales salaries (acct 6010) were only +3.45% over budget, not a sign of reduced sales activity.",
+      "COGS / Hosting & Infrastructure (acct 5000, not in the budget system but material to the P&L): $315,180 (Jun) \u2192 $347,680 (Jul, +10.3%) \u2192 $396,200 (Aug, +13.96%), vs. revenue growth of under 1.3%/month over the same span \u2014 the primary driver of the gross margin decline from 78.0% to 73.05%."
+    ],
+    "forecast_status": "set",
+    "findings": [
+      "Gross margin: stable at 78.0% Jan-Jun 2026, then declined to 76.0% in Jul and 73.05% in Aug \u2014 a two-month accelerating slide, not a one-off blip.",
+      "Root cause of margin decline: Hosting & Infrastructure COGS (acct 5000) grew 10.3% (Jun\u2192Jul) and 13.96% (Jul\u2192Aug), far outpacing revenue growth of 0.88-1.21% per month over the same period; Third-Party Data Costs were flat at $8,000/month and not a factor.",
+      "Operating income is negative (-$518,599.67 in Aug) and opex continues to rise: Engineering salaries grew from $586,802 (Jun) to $622,363 (Aug), and Payroll Taxes & Benefits from $244,198 to $257,019, adding pressure alongside the COGS trend.",
+      "Budget variance scan (10 lines with budgets) found only two lines exceeding 5% variance: Marketing +28% ($18,164 over) and Sales Commissions -100% ($6,904 under, zero actual). All other lines (GA facilities +4.94%, Sales salaries +3.45%, CS salaries +2.37%, Eng salaries -2.16%, GA salaries -3.72%, GA software -2.98%, Marketing salaries -2.73%, GA professional fees -2.64%) were within normal range.",
+      "Revenue history (Sep 2025-Aug 2026) shows deceleration: ~1.8-1.9%/month growth through Jan 2026, slowing to ~0.9-1.2%/month from Apr-Aug 2026.",
+      "Forecast: recorded 1.0%/month growth assumption for Sep-Nov 2026 (vs. the model's naive 1.31%/month inference from the full 12-month window), based on the trailing 3-month actual average and reinforced by the cost trend outpacing revenue. No prior assumption existed, so this was accepted directly (no approval gate triggered)."
+    ]
+  },
+  "cfo_briefing": {
+    "summary": "August 2026 shows an accelerating cash burn problem masked by a still-healthy top line. Revenue grew slightly to $1.5M, but operating loss widened to -$518,600 (from -$419,490 in July and -$338,193 in May), driven primarily by rapidly rising hosting/infrastructure COGS compressing gross margin from ~78% (May-June) to 73.05% (August). Payroll is also a large draw at 98.73% of revenue, but per Payroll this is a structural, budgeted headcount-driven cost, not a one-off spike. Cash fell to $2,177,518.23 (ending) with a monthly net cash decline of $651,719.02, leaving a flat-burn runway estimate of 4.4 months \u2014 though FP&A's trend-based projection suggests the runway could be shorter if COGS growth isn't controlled. Balance sheet liabilities of $0 were confirmed reconciled for AP by the Controller, though accrued payroll/other liabilities weren't independently verified as correctly zero.",
+    "facts": [
+      "2026-08 revenue: $1,499,999.99 (Subscription Revenue only)",
+      "2026-08 COGS: $404,200.00 (Hosting & Infrastructure $396,200.00; Third-Party Data $8,000.00); gross profit $1,095,799.99; gross margin 73.05%",
+      "2026-08 total opex: $1,614,399.66; operating loss: -$518,599.67",
+      "2026-08 payroll cost: $1,480,918.92 = 98.73% of revenue",
+      "2026-08 net change in cash: -$651,719.02 (beginning cash $2,829,237.25 \u2192 ending cash $2,177,518.23)",
+      "Cash flow by source (2026-08): AP -$525,040.74; AR collections +$1,366,880.64; bank feed -$12,640.00; payroll -$1,480,918.92",
+      "Cash runway (flat-burn basis): 4.4 months at avg monthly burn of ~$491,729.44",
+      "Balance sheet (2026-08): total assets $2,476,755.33; total liabilities $0.00; equity $2,476,755.33 (paid-in capital $6,000,000.00; cumulative net income -$3,523,244.67); balanced",
+      "Payroll trend (per Payroll agent): $1,362,244 (Apr) \u2192 $1,390,958 (May) \u2192 $1,407,043 (Jun) \u2192 $1,465,067 (Jul) \u2192 $1,480,919 (Aug); Aug MoM increase +1.1%, driven by 1 added Engineering headcount (49\u219250 FTE)",
+      "Aug 2026 salary budget variance: aggregate -0.79% ($1,223,900 actual vs $1,233,589 budget); Engineering -2.16%, G&A -3.72%, Marketing salaries -2.73%, CS +2.37%, Sales +3.45%",
+      "Controller confirmed: AP GL balance $0.00 ties exactly to AP subledger $0.00; AR GL $299,237.10 ties to AR subledger $299,237.10; trial balance balanced at $4,913,880.29 debits=credits; 0 duplicate invoices found; no open AP/payroll-accrual correction requests (only $13,832.95 in unrelated pending categorization items: Staples, Meridian Consulting, Amex)",
+      "Per FP&A: operating loss trend -$338,193.34 (May) \u2192 -$344,132.62 (Jun) \u2192 -$419,489.97 (Jul) \u2192 -$518,599.67 (Aug); gross margin trend 78.0% (May-Jun) \u2192 76.0% (Jul) \u2192 73.05% (Aug)",
+      "Per FP&A: Hosting & Infrastructure COGS grew $312,320 (May) \u2192 $315,180 (Jun) \u2192 $347,680 (Jul, +10.3%) \u2192 $396,200 (Aug, +13.96%), while revenue grew only ~0.9-1.2%/month over the same period",
+      "Per FP&A: Marketing spend was $83,037.15 actual vs $64,872.77 budgeted for August (+28% over budget); hosting COGS has no budget line tracked in the current forecast model",
+      "Per FP&A: the active forecast assumption has lowered projected revenue growth to 1.0%/month for September (down from 1.8-1.9%/month in prior periods), citing hosting-cost growth outpacing revenue"
+    ],
+    "hypotheses": [
+      "The primary driver of the widening operating loss is COGS (hosting/infrastructure) growth outpacing revenue growth, not payroll or opex overspend \u2014 payroll and most departmental salary lines are actually running at or under budget.",
+      "The flat 4.4-month runway figure likely understates urgency: if hosting COGS growth and the recent loss-acceleration trend continue unchecked, FP&A's trend-based projection implies cash could be exhausted around November-December 2026, sooner than the flat-burn estimate suggests.",
+      "The Marketing overage (+28% vs budget) is a secondary, more controllable contributor to the loss compared to the structural COGS issue.",
+      "A $0.00 total-liabilities balance is plausible in a company that pays AP down to zero and may not carry material accrued liabilities, but it's atypical enough (no accrued payroll, payroll taxes payable, or deferred revenue) to warrant independent confirmation rather than being accepted at face value."
+    ],
+    "recommendations": [
+      "Prioritize an operational/vendor review of Hosting & Infrastructure costs (up ~14% MoM in August) \u2014 investigate usage drivers, renegotiate vendor terms, or introduce a hosting cost budget/alert threshold, since this is currently untracked against budget.",
+      "Have the Controller (or an outside reviewer) specifically verify that payroll tax accruals, accrued payroll, and deferred revenue liability accounts are correctly nil at period end, rather than relying on the AP subledger tie-out alone.",
+      "Ask FP&A to formally update the cash runway/going-concern model using the accelerating burn trend (not a flat-burn assumption) and present both scenarios to leadership immediately, given the potential Nov-Dec 2026 cash exhaustion signal.",
+      "Review the Marketing budget overage (+28%) with the Marketing team to determine if it's one-time or recurring, and reconcile it against expected pipeline/revenue impact.",
+      "Given the current trajectory, evaluate near-term financing options, expense reduction levers, or a slower headcount-growth plan before the runway compresses further."
+    ],
+    "open_questions": [
+      "Is the $0 total-liabilities figure fully correct, or are there unrecorded accrued payroll, payroll tax, or deferred revenue liabilities that the current reconciliation tools didn't independently verify? (Controller flagged this as unresolved.)",
+      "What is specifically driving the 10-14% month-over-month growth in hosting/infrastructure costs \u2014 usage growth, price increases, inefficient architecture, or a one-time vendor change? No specialist could fully attribute the root cause from available data.",
+      "Is the Marketing budget overage a one-time campaign spend or an ongoing run-rate change?",
+      "Does management have a committed plan (financing, cost cuts, revenue acceleration) to address the potential cash-exhaustion window FP&A projected for Nov-Dec 2026, given that a flat 4.4-month estimate may be overly optimistic?"
+    ],
+    "agents_delegated_to": [
+      "payroll",
+      "controller",
+      "fpa"
+    ]
+  },
+  "audit_log_summary": {
+    "payroll_agent": 53,
+    "ap_agent": 50,
+    "fpa_agent": 26,
+    "bookkeeping_agent": 22,
+    "controller_agent": 19,
+    "ar_agent": 18,
+    "cfo_agent": 8,
+    "orchestrator": 5
+  }
+}

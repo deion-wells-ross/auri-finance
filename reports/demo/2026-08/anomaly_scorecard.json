@@ -1,0 +1,43 @@
+{
+  "period": "2026-08",
+  "found_count": 6,
+  "total": 6,
+  "results": [
+    {
+      "id": 1,
+      "name": "Duplicate CloudScale Hosting invoice",
+      "found": true,
+      "evidence": "ap_a52c5ddb25 marked 'disputed' via resolve_duplicate_invoice (duplicate of ap_2457e406df)"
+    },
+    {
+      "id": 2,
+      "name": "Engineering payroll outpacing revenue",
+      "found": true,
+      "evidence": "payroll_agent's submitted report mentions 'engineering'"
+    },
+    {
+      "id": 3,
+      "name": "Gross margin decline",
+      "found": true,
+      "evidence": "fpa_agent's submitted report has gross_margin_trend_explained=true"
+    },
+    {
+      "id": 4,
+      "name": "AR concentration + aging (Vantage)",
+      "found": true,
+      "evidence": "ar_agent's submitted report mentions 'vantage'"
+    },
+    {
+      "id": 5,
+      "name": "Marketing budget overrun",
+      "found": true,
+      "evidence": "fpa_agent's submitted report mentions 'marketing'"
+    },
+    {
+      "id": 6,
+      "name": "Genuine bookkeeping ambiguity ($9,800)",
+      "found": true,
+      "evidence": "escalate_for_review called on feed_3e68a9eeb3 rather than guessed at"
+    }
+  ]
+}
